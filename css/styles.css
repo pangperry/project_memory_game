@@ -11,3 +11,21 @@ html {
 body {
   background: #bada55;
 }
+
+main {
+
+}
+
+.board {
+
+}
+
+ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+li {
+  list-style: none;
+  width: 100%
+}
