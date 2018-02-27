@@ -86,7 +86,7 @@ h1 {
   width: 100%;
 }
 
-.card:hover {
+.flipped {
   transform: rotateY(180deg);
 }
 

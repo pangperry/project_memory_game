@@ -43,12 +43,45 @@ $(function() {
     }, 1000);
   };
 
-  $('.flip').click(function () {
-    $(this).find('.card').addClass('flipped').mouseleave(function () {
-      $(this).removeClass('flipped');
+  var startGame = function() {
+    var $matcher = null;
+    var pairs = 0;
+    var guesses = 0;
+    var cards = shuffleCards($('li'));
+    display(cards);
+
+    //TODOs: 
+    //Fix issue with multiple clicks--maybe using .off somehow
+    //add end game conditions (while loop);
+    //write stars logic
+  
+    $('li').click(function (e) {
+      e.preventDefault();
+      $card = $(this).find('.card');
+
+      if (!$matcher && !$card.hasClass('flipped')) {
+        $card.addClass('flipped');
+        $matcher = $card; 
+      } else if ($matcher && !$card.hasClass('flipped')) {
+        $card.addClass('flipped');
+        if ($matcher[0].dataset.pair === $card[0].dataset.pair) {
+          pairs++;
+          guesses++;
+          $matcher = null;
+        }
+        if ($matcher && $matcher[0].dataset.pair !== $card[0].dataset.pair) {
+          setTimeout(function() {
+            $card.removeClass('flipped');
+            $matcher.removeClass('flipped');
+            $matcher = null;
+          }, 1000);
+          guesses++;
+        }
+      }
     });
-    return true;
-  });
+  }
+  startGame();
+
 
   var cards = $('li');
   var shuffled = shuffleCards(cards);
