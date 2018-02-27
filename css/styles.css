@@ -16,7 +16,6 @@ html {
 body {
   width: 100%;
   font-family: Audiowide;
-  /* font: normal Droid Sans 20px/24px; */
   background: #fff;
 }
 
@@ -26,7 +25,6 @@ header, body, main, .board, li {
 
 header {
   width: 100%;
-  /* position: relative; */
   padding: 60px 0;
   height: 150px;
   margin: 0 auto 25px auto;
@@ -41,6 +39,7 @@ header {
   height: 35px;
   border-radius: 20%;
 }
+
 h1 {
   text-align: center;
   text-transform: uppercase;
@@ -50,6 +49,7 @@ h1 {
   text-align: center;
   padding: 35px;
 }
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -60,20 +60,45 @@ h1 {
   justify-content: center;
 }
 
-.card {
+.card-container {
   display: grid;
   list-style: none;
-  width: 55px;
-  height: 55px;
-  background: #bada55;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  position: relative;
   align-content: center;
   justify-content: center;
 }
 
-.front {
-  display: none;
+.card {
+  /* display: grid; */
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  background: #4949A5;
+  width: 100%;
 }
 
-.back {
-
+.card .back {
+  background: #C40D0D;
+  /* color: #2E5C74; */
+  line-height: 150px;
+  text-align: center;
+  transform: rotateY(180deg);
 }
