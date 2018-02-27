@@ -14,30 +14,42 @@ html {
 }
 
 body {
-  background: #bada55;
+  background: #fff;
 }
 
 header, body, main, .board, li {
   margin: 0 auto;
-}
-h1 {
-  text-align: center;
 }
 
 header, .board {
   width: 80%;
 }
 
+header {
+  padding: 60px 0;
+  height: 150px;
+  margin: 0 auto 45px auto;
+}
+
+h1 {
+  text-align: center;
+}
+
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
   text-align: center;
+  align-content: center;
   justify-content: center;
-  justify-items: center;
 }
 
-li {
+.card {
+  display: grid;
   list-style: none;
-  width: 100%;
-  /* justify-self: center; */
+  width: 55px;
+  height: 55px;
+  background: #bada55;
+  align-content: center;
+  justify-content: center;
 }
