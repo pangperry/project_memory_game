@@ -45,9 +45,14 @@ h1 {
   text-transform: uppercase;
 }
 
-.stars p {
+#time {
   text-align: center;
-  padding: 35px;
+}
+
+#stars {
+  text-align: center;
+  padding: 20px;
+  margin: 0 0 20px 0;
 }
 
 .board {
