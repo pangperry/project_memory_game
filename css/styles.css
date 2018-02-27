@@ -60,6 +60,8 @@ h1 {
   justify-content: center;
 }
 
+/* flippable cards inspired by Shay Howe: https://codepen.io/shayhowe/pen/Fvjnf */
+
 .card-container {
   display: grid;
   list-style: none;
@@ -72,16 +74,17 @@ h1 {
 }
 
 .card {
-  /* display: grid; */
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
   transition: all 1s ease-in-out;
   width: 100%;
 }
+
 .card:hover {
   transform: rotateY(180deg);
 }
+
 .card .side {
   display: grid;
   align-content: center;
