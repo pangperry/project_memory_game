@@ -69,3 +69,11 @@ h1 {
   align-content: center;
   justify-content: center;
 }
+
+.front {
+  display: none;
+}
+
+.back {
+
+}
