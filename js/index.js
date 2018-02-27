@@ -51,34 +51,43 @@ $(function() {
     display(cards);
 
     //TODOs: 
-    //Fix issue with multiple clicks--maybe using .off somehow
     //add end game conditions (while loop);
     //write stars logic
-  
-    $('li').click(function (e) {
-      e.preventDefault();
-      $card = $(this).find('.card');
 
-      if (!$matcher && !$card.hasClass('flipped')) {
-        $card.addClass('flipped');
-        $matcher = $card; 
-      } else if ($matcher && !$card.hasClass('flipped')) {
-        $card.addClass('flipped');
-        if ($matcher[0].dataset.pair === $card[0].dataset.pair) {
-          pairs++;
-          guesses++;
-          $matcher = null;
-        }
-        if ($matcher && $matcher[0].dataset.pair !== $card[0].dataset.pair) {
-          setTimeout(function() {
-            $card.removeClass('flipped');
-            $matcher.removeClass('flipped');
+    var findPair = function() {
+      $('li').click(function (e) {
+        e.preventDefault();
+        $card = $(this).find('.card');
+
+        if (!$matcher && !$card.hasClass('flipped')) {
+          $card.addClass('flipped');
+          $matcher = $card;
+        } else if ($matcher && !$card.hasClass('flipped')) {
+          $('li').off('click');
+          $card.addClass('flipped');
+          if ($matcher[0].dataset.pair === $card[0].dataset.pair) {
+            pairs++;
+            guesses++;
             $matcher = null;
-          }, 1000);
-          guesses++;
+          }
+          if ($matcher && $matcher[0].dataset.pair !== $card[0].dataset.pair) {
+            $('li').off('click');
+            setTimeout(function () {
+              $card.removeClass('flipped');
+              $matcher.removeClass('flipped');
+              $matcher = null;
+            }, 1000);
+            guesses++;
+          }
+          setTimeout(function() {
+            if (pairs < 8) {
+              findPair();
+            }
+          }, 1500);
         }
-      }
-    });
+      });
+    }
+    findPair();
   }
   startGame();
 
