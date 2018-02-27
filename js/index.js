@@ -36,7 +36,7 @@ $(function() {
 
       (['hours', 'minutes', 'seconds']).forEach(unit => {
         if (times[unit]) {
-          $(`#${unit}`).text(`${unit} ${times[unit]}`);
+          $(`#${unit}`).text(`${unit} ${times[unit]} `);
         }
       });
 
@@ -49,7 +49,6 @@ $(function() {
     });
     return true;
   });
-
 
   var cards = $('li');
   var shuffled = shuffleCards(cards);
