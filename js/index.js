@@ -59,6 +59,7 @@ $(function() {
     //make responsive
 
     var findPair = function() {
+      $('#guesses').text(guesses);
       $('li').click(function (e) {
         e.preventDefault();
         $card = $(this).find('.card');
@@ -72,7 +73,6 @@ $(function() {
           $card.addClass('flipped');
           if ($matcher[0].dataset.pair === $card[0].dataset.pair) {
             pairs++;
-            guesses++;
             $matcher = null;
           }
           if ($matcher && $matcher[0].dataset.pair !== $card[0].dataset.pair) {
@@ -82,7 +82,6 @@ $(function() {
               $matcher.removeClass('flipped');
               $matcher = null;
             }, 1000);
-            guesses++;
           }
           setTimeout(function() {
             if (pairs < 8) {
