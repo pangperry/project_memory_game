@@ -49,10 +49,14 @@ $(function() {
     var guesses = 0;
     var cards = shuffleCards($('li'));
     display(cards);
+    startTimer();
 
     //TODOs: 
+    //add guesses to screen
     //add end game conditions (while loop);
     //write stars logic
+    //wire up reset
+    //make responsive
 
     var findPair = function() {
       $('li').click(function (e) {
@@ -63,6 +67,7 @@ $(function() {
           $card.addClass('flipped');
           $matcher = $card;
         } else if ($matcher && !$card.hasClass('flipped')) {
+          guesses++;
           $('li').off('click');
           $card.addClass('flipped');
           if ($matcher[0].dataset.pair === $card[0].dataset.pair) {
@@ -89,10 +94,6 @@ $(function() {
     }
     findPair();
   }
+
   startGame();
-
-
-  var cards = $('li');
-  var shuffled = shuffleCards(cards);
-  startTimer();
 });

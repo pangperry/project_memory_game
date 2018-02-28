@@ -16,16 +16,10 @@
   <header>
     <button class="reset"><i class="fas fa-redo"></i></button>
     <h1>Memory Game</h1>
+    <p id="time">Elapsed Time: <span id="hours"></span><span id="minutes"></span><span id="seconds"></span></p>
   </header>
   <main>
-    <p id="time">Elapsed Time: <span id="hours"></span><span id="minutes"></span><span id="seconds"></span></p>
-    <p id="stars">
-      <span>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="far fa-star"></i>
-      </span>
-      </p>
+
     <ul class="board">
       <li class='card-container'>
         <div class="card" data-pair="coffee">
@@ -139,7 +133,21 @@
           </div>
         </li>
     </ul>
+
+
   </main>
+  <footer>
+    <p id="guesses">
+      <span>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+      </span>
+     Total Guesses: <span id="guesses"></span>
+    </p>
+  </footer>
+
+
   <script src="js/index.js"></script>
 </body>
 </html>

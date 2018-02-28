@@ -27,7 +27,7 @@ header {
   width: 100%;
   padding: 60px 0;
   height: 150px;
-  margin: 0 auto 25px auto;
+  margin: 0 auto;
 }
 
 .reset {
@@ -46,19 +46,18 @@ h1 {
 }
 
 #time {
+  font-size: .9em;
   text-align: center;
-}
-
-#stars {
-  text-align: center;
-  padding: 20px;
-  margin: 0 0 20px 0;
-}
+  width: 100%;
+  grid-column-start: 0;
+  grid-column-end: 2;
+} 
 
 .board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 80%;
+  padding: 25px 0;
+  width: 85%;
   grid-gap: 30px;
   text-align: center;
   align-content: center;
@@ -109,4 +108,23 @@ h1 {
   line-height: 150px;
   text-align: center;
   transform: rotateY(180deg);
+}
+
+footer  {
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  padding: 20px 0 0 15px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#stars {
+  text-align: center;
+  padding: 25px 0 5px 0;
+}
+
+#guesses {
+  font-size: 1.2em;
+  text-align: left;
+  margin: 0 0 20px 0;
 }
