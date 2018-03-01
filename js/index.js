@@ -1,17 +1,14 @@
 $(function() {
-  var shuffleCards = function (list) {
-    var length = list.length;
-    var newLength = length;
-    var tempList = list.slice();
-    var shuffled = [];
-
-    for (var i = 0; i < length; i++) {
-      var index = Math.random() * newLength;
-      shuffled.push(tempList.splice(index, 1));
+  //used modern version of Fisher and Yates for improved shuffling:
+  //https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+  function shuffleCards(cards) {
+    for (i = 0;  i < cards.length; i++) {
+      const j = Math.floor(Math.random() * i);
+      [cards[i], cards[j]] = [cards[j], cards[i]];
     }
-
-    return shuffled;
-  };
+  
+    return cards;
+  }
 
   var display = function(cards) {
     $ul = $('ul');
