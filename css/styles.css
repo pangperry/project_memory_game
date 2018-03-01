@@ -81,7 +81,7 @@ h1 {
   height: 100%;
   position: absolute;
   transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
+  transition: all .5s ease-in-out;
   width: 100%;
 }
 
@@ -111,10 +111,8 @@ h1 {
 }
 
 footer  {
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr 1fr; */
   padding: 20px 0 0 15px;
-  width: 80%;
+  width: 75%;
   margin: 0 auto;
 }
 
@@ -124,7 +122,6 @@ footer  {
 }
 
 #guesses {
-  font-size: 1.2em;
   text-align: left;
   margin: 0 0 20px 0;
 }

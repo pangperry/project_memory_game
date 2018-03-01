@@ -52,16 +52,19 @@ $(function() {
     startTimer();
 
     //TODOs: 
-    //add guesses to screen
     //add end game conditions (while loop);
     //write stars logic
     //wire up reset
     //make responsive
 
     var findPair = function() {
+      var audio = $('audio')[0];
       $('#guesses').text(guesses);
       $('li').click(function (e) {
         e.preventDefault();
+        audio.currentTime = 0;
+        audio.play();
+        // $('audio')[0].play();
         $card = $(this).find('.card');
 
         if (!$matcher && !$card.hasClass('flipped')) {
@@ -80,6 +83,8 @@ $(function() {
             setTimeout(function () {
               $card.removeClass('flipped');
               $matcher.removeClass('flipped');
+              audio.currentTime = 0;
+              audio.play();
               $matcher = null;
             }, 1000);
           }
