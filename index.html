@@ -134,18 +134,41 @@
         </li>
     </ul>
   </main>
+
   <footer>
     <p >
-      <span>
+      <span class="best hidden">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </span>
+      <span class="great">
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
         <i class="far fa-star"></i>
       </span>
-     Total Guesses: <span id="guesses"></span>
+      <span class="good hidden">
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+      </span>
+      <span class="fair hidden">
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+      </span>
+     
+      Total Guesses: <span id="guesses"></span>
     </p>
   </footer>
+
+  <!-- audio -->
+
   <audio src="audio/flip_card.wav"></audio>
-  <div id="modal">
+
+  <!-- modal -->
+
+  <div id="modal" class="hidden">
     <div class="success">
       <h1>
         <i class="far fa-thumbs-up fa-1x"></i>
