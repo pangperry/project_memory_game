@@ -59,11 +59,43 @@ $(() => {
         runGame();
       };
     });
+  };
+  
+  const resetRatings = () => {
+    const $stars = $('.stars');
+    for (let i = 0; i < $stars.length; i++) {
+      if(!$($stars[i]).hasClass('hidden')) {
+        $($stars[i]).addClass('hidden');
+      }
+    }
+  }
 
+  const selectRating = (type) => {
+    resetRatings();
+    const $ratings = $('.stars');
+    const options = ['best', 'great', 'good', 'fair'];
+    const rating = options.indexOf(type);
+    $($ratings[rating]).removeClass('hidden');
+  };
+
+  const enableStars = () => {
+    $("#guesses").change(() => {
+      let guessCount = Number($("#guesses").text());
+      if (guessCount === 0) {
+        selectRating('best')
+      } else if (guessCount === 14) {
+        selectRating('good');
+      } else if (guessCount === 20) {
+        selectRating('fair');
+      }
+    });
   };
 
   //updates guess display count
-  const updateCount = (guesses) => $('#guesses').text(guesses);
+  const updateCount = (guesses) => {
+    $('#guesses').text(guesses);
+    $('#guesses').trigger('change');
+  }
 
   const playCardSound = (audio) => {
     audio.currentTime = 0;
@@ -95,7 +127,6 @@ $(() => {
   const findPairs = (audio, $firstCard, timer, guesses, pairs) => {
     updateCount(guesses);
     $('li').click(function (e) {
-      e.preventDefault();
       playCardSound(audio);
       const $currentCard = $(this).find('.card');
       const isFlippable = !$currentCard.hasClass('flipped');
@@ -112,6 +143,7 @@ $(() => {
           $firstCard = null;
         } else {
           pauseClicks();
+
           // setTimeouts allow time for cards to be seen
           setTimeout(function () {
             resetCards($currentCard, $firstCard, audio);
@@ -119,7 +151,7 @@ $(() => {
           }, 1000);
         }
         setTimeout(function () {
-          pairs > 0 ?
+          pairs > 7 ?
             endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
         }, 1000);
       }
@@ -128,12 +160,13 @@ $(() => {
 
   const runGame = () => {
     const cards = shuffleCards($('li'));
+    const audio = $('audio')[0];
     let pairs = 0;
     let guesses = 0;
     let timer = startTimer();
-    let audio = $('audio')[0];
     audio.volume = .2;
     display(cards);
+    enableStars();
     enableResets(timer);
     findPairs(audio, null, timer, guesses, pairs);
   }
@@ -142,8 +175,8 @@ $(() => {
 });
 
     //TODOs: 
-    //write stars logic
-    //add wrong guess sound and action
-    //make responsive
-    //add high score list with local storage
-
+      //write stars logic
+      //add wrong guess sound and action
+      //make responsive
+      //maybe replace confirmation with modal confirmation
+      //add high score list with local storage
