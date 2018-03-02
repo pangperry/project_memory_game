@@ -35,6 +35,31 @@ $(() => {
     return timer;
   };
 
+  //enables both reset buttons, one with confirmation
+  const enableResets = (timer) => {
+    $('button').on('click', function () {
+      let confirmation = true;
+      if ($(this).hasClass('re-btn')) {
+        message = window.confirm("Restart game?");
+      }
+
+      if (confirmation || $(this).hasClass('start-btn')) {
+        clearInterval(timer);
+        timer = null;
+        if (!$('#modal').hasClass('hidden')) {
+          $('#modal').addClass('hidden');
+        }
+        $('li').find('.flipped').removeClass('flipped');
+        $('#hours').text('');
+        $('#minutes').text('');
+        $('#seconds').text('');
+
+        runGame();
+      };
+    });
+
+  };
+
   //updates guess display count
   const updateCount = (guesses) => $('#guesses').text(guesses);
 
@@ -92,7 +117,7 @@ $(() => {
           }, 1000);
         }
         setTimeout(function () {
-          pairs > 0 ? 
+          pairs > 0 ?
             endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
         }, 1000);
       }
@@ -107,6 +132,7 @@ $(() => {
     let audio = $('audio')[0];
     audio.volume = .2;
     display(cards);
+    enableResets(timer);
     findPairs(audio, null, timer, guesses, pairs);
   }
 
@@ -114,9 +140,9 @@ $(() => {
 });
 
     //TODOs: 
-    //add wrong guess sound and action
     //write stars logic
-    //wire up reset
+    //wire up reset and reset
+    //add wrong guess sound and action
     //make responsive
     //add high score list with local storage
 
