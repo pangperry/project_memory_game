@@ -76,7 +76,7 @@ $(() => {
         flip($currentCard);
         $firstCard = $currentCard;
       } else if ($firstCard && isFlippable) {
-        var isMatch = $firstCard[0].dataset.pair === $currentCard[0].dataset.pair;
+        const isMatch = $firstCard[0].dataset.pair === $currentCard[0].dataset.pair;
         flip($currentCard);
         pauseClicks();
         guesses++;
