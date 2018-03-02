@@ -138,6 +138,10 @@ footer  {
   z-index: 2;
 }
 
+.hidden {
+  display: none;
+}
+
 .success {
   /* display: none; */
   /* margin: 0 auto; */
