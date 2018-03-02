@@ -46,7 +46,8 @@ $(() => {
 
   const pauseClicks = () => $('li').off('click');
 
-  const reflipCards = ($currentCard, $firstCard, audio) => {
+  // returns pairs of flipped cards to starting position
+  const resetCards = ($currentCard, $firstCard, audio) => {
     $currentCard.removeClass('flipped');
     $firstCard.removeClass('flipped');
     playCardSound(audio);
@@ -57,57 +58,52 @@ $(() => {
     $('#modal').removeClass('hidden');
   };
 
-  const startGame = () => {
-    let timer;
-    let pairs = 0;
-    let guesses = 0;
-    const cards = shuffleCards($('li'));
-    const audio = $('audio')[0];
-    audio.volume = .2;
-
-    // recursively finds pairs until pairs equals 8
-    const findPairs = (audio, $firstCard=null) => {
-      updateCount(guesses);
-      $('li').click(function (e) {
-        e.preventDefault();
-        playCardSound(audio);
-        const $currentCard = $(this).find('.card');
-        const isFlippable = !$currentCard.hasClass('flipped');
-
-        if (!$firstCard && isFlippable) {
-          flip($currentCard);
-          $firstCard = $currentCard;
-        } else if ($firstCard && isFlippable) {
-          var isMatch = $firstCard[0].dataset.pair === $currentCard[0].dataset.pair;
-          flip($currentCard);
+  // recursively finds pairs until pairs equals 8
+  const findPairs = (audio, $firstCard, timer, guesses, pairs) => {
+    updateCount(guesses);
+    $('li').click(function (e) {
+      e.preventDefault();
+      playCardSound(audio);
+      const $currentCard = $(this).find('.card');
+      const isFlippable = !$currentCard.hasClass('flipped');
+      if (!$firstCard && isFlippable) {
+        flip($currentCard);
+        $firstCard = $currentCard;
+      } else if ($firstCard && isFlippable) {
+        var isMatch = $firstCard[0].dataset.pair === $currentCard[0].dataset.pair;
+        flip($currentCard);
+        pauseClicks();
+        guesses++;
+        if (isMatch) {
+          pairs++;
+          $firstCard = null;
+        } else {
           pauseClicks();
-          guesses++;
-
-          if (isMatch) {
-            pairs++;
-            $firstCard = null;
-          } else {
-            pauseClicks();
-            // delays one second so player has time to read cards
-            setTimeout(function () {
-              reflipCards($currentCard, $firstCard, audio);
-              $firstCard = null;
-            }, 1000);
-          }
-          // delays one second so player has time to read cards
+          // setTimeouts allow time for cards to be seen
           setTimeout(function () {
-            pairs < 2 ? findPairs(audio) : endGame(timer);
+            resetCards($currentCard, $firstCard, audio);
+            $firstCard = null;
           }, 1000);
         }
-      });
-    }
-
-    timer = startTimer();
-    display(cards);
-    findPairs(audio);
+        setTimeout(function () {
+          pairs < 2 ? findPairs(audio, $firstCard, timer, guesses, pairs) : endGame(timer);
+        }, 1000);
+      }
+    });
   }
 
-  startGame();
+  const runGame = () => {
+    const cards = shuffleCards($('li'));
+    let pairs = 0;
+    let guesses = 0;
+    let timer = startTimer();
+    let audio = $('audio')[0];
+    audio.volume = .2;
+    display(cards);
+    findPairs(audio, null, timer, guesses, pairs);
+  }
+
+  runGame();
 });
 
     //TODOs: 
