@@ -1,13 +1,13 @@
-$(function() {
-  function shuffleCards(cards) {
-    for (i = 0;  i < cards.length; i++) {
-      const j = Math.floor(Math.random() * i);
+$(() => {
+  const shuffleCards = (cards) => {
+    for (let i = 0; i < cards.length; i++) {
+      let j = Math.floor(Math.random() * i);
       [cards[i], cards[j]] = [cards[j], cards[i]];
     }
     return cards;
   }
 
-  var display = function(cards) {
+  const display = (cards) => {
     $ul = $('ul');
     for (var card = 0; card < cards.length; card++) {
       $ul.append(cards[card]);
@@ -15,16 +15,16 @@ $(function() {
   };
 
   // starts and dynamically updates timer
-  var startTimer = function() {
-    var start = Date.now();
-    var timer = setInterval(function() {
-      var currentTime = Date.now();
-      var elapsed = currentTime - start;
-      var totalSeconds = Math.floor(elapsed / 1000);
-      var times = {
-        seconds : Math.floor(totalSeconds % 60), 
-        minutes : Math.floor(totalSeconds / 60 % 60),
-        hours : Math.floor(totalSeconds  / 1000 / 60 / 60 % 24),
+  const startTimer = () => {
+    const start = Date.now();
+    const timer = setInterval(function () {
+      let currentTime = Date.now();
+      let elapsed = currentTime - start;
+      let totalSeconds = Math.floor(elapsed / 1000);
+      let times = {
+        seconds: Math.floor(totalSeconds % 60),
+        minutes: Math.floor(totalSeconds / 60 % 60),
+        hours: Math.floor(totalSeconds / 1000 / 60 / 60 % 24),
       };
       (['hours', 'minutes', 'seconds']).forEach(unit => {
         if (times[unit]) {
@@ -35,39 +35,44 @@ $(function() {
     return timer;
   };
 
-  var updateCount = function(guesses) {
-    $('#guesses').text(guesses);
-  }
+  const updateCount = (guesses) => $('#guesses').text(guesses);
 
-  var playCardSound = function(audio) {
+  const playCardSound = (audio) => {
     audio.currentTime = 0;
     audio.play();
-  }
+  };
 
-  var flip = function(card) {
-    card.addClass('flipped');
-  }
+  const flip = (card) => card.addClass('flipped');
 
-  var pauseClicks = function() {
-    $('li').off('click');
-  }
+  const pauseClicks = () => $('li').off('click');
 
-  var startGame = function() {
-    var timer; 
-    var pairs = 0;
-    var guesses = 0;
-    var cards = shuffleCards($('li'));
-    var audio = $('audio')[0];
+  const reflipCards = ($currentCard, $firstCard, audio) => {
+    $currentCard.removeClass('flipped');
+    $firstCard.removeClass('flipped');
+    playCardSound(audio);
+  };
+
+  const endGame = (timer) => {
+    clearInterval(timer);
+    $('#modal').removeClass('hidden');
+  };
+
+  const startGame = () => {
+    let timer;
+    let pairs = 0;
+    let guesses = 0;
+    const cards = shuffleCards($('li'));
+    const audio = $('audio')[0];
     audio.volume = .2;
 
     // recursively finds pairs until pairs equals 8
-    var findPairs = function(audio, $firstCard=null) {
+    const findPairs = (audio, $firstCard=null) => {
       updateCount(guesses);
       $('li').click(function (e) {
         e.preventDefault();
         playCardSound(audio);
-        var $currentCard = $(this).find('.card');
-        var isFlippable = !$currentCard.hasClass('flipped');
+        const $currentCard = $(this).find('.card');
+        const isFlippable = !$currentCard.hasClass('flipped');
 
         if (!$firstCard && isFlippable) {
           flip($currentCard);
@@ -81,24 +86,17 @@ $(function() {
           if (isMatch) {
             pairs++;
             $firstCard = null;
-          } else { 
+          } else {
             pauseClicks();
             // delays one second so player has time to read cards
             setTimeout(function () {
-              $currentCard.removeClass('flipped');
-              $firstCard.removeClass('flipped');
-              playCardSound(audio);
+              reflipCards($currentCard, $firstCard, audio);
               $firstCard = null;
             }, 1000);
           }
           // delays one second so player has time to read cards
-          setTimeout(function() {
-            if (pairs < 8) {
-              findPairs(audio);
-            } else {
-              clearInterval(timer);
-              $('#modal').removeClass('hidden');
-            }
+          setTimeout(function () {
+            pairs < 2 ? findPairs(audio) : endGame(timer);
           }, 1000);
         }
       });
