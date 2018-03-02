@@ -35,6 +35,14 @@ $(() => {
     return timer;
   };
 
+  const resetTime = (timer) => {
+    clearInterval(timer);
+    timer = null;
+    $('#hours').text('');
+    $('#minutes').text('');
+    $('#seconds').text('');
+  }
+
   //enables both reset buttons, one with confirmation
   const enableResets = (timer) => {
     $('button').on('click', function () {
@@ -42,18 +50,12 @@ $(() => {
       if ($(this).hasClass('re-btn')) {
         message = window.confirm("Restart game?");
       }
-
       if (confirmation || $(this).hasClass('start-btn')) {
-        clearInterval(timer);
-        timer = null;
         if (!$('#modal').hasClass('hidden')) {
           $('#modal').addClass('hidden');
         }
         $('li').find('.flipped').removeClass('flipped');
-        $('#hours').text('');
-        $('#minutes').text('');
-        $('#seconds').text('');
-
+        resetTime(timer);
         runGame();
       };
     });
@@ -141,7 +143,6 @@ $(() => {
 
     //TODOs: 
     //write stars logic
-    //wire up reset and reset
     //add wrong guess sound and action
     //make responsive
     //add high score list with local storage
