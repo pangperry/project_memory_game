@@ -50,9 +50,11 @@ $(function() {
 
     //TODOs: 
     //add end game conditions (while loop);
+    //add wrong guess sound and action
     //write stars logic
     //wire up reset
     //make responsive
+    //add high score list with local storage
 
     var findPair = function() {
       var audio = $('audio')[0];

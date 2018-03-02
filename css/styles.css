@@ -125,3 +125,50 @@ footer  {
   text-align: left;
   margin: 0 0 20px 0;
 }
+
+/* modal */
+#modal {
+  position: fixed;
+  padding: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left:0;
+  background: rgba(155,155,155, .6);
+  z-index: 2;
+}
+
+.success {
+  /* display: none; */
+  /* margin: 0 auto; */
+  text-align: center;
+  min-width: 200px;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+  top: 150px;
+  width: 90%;
+  height: 300px;
+}
+
+.success h1 {
+  padding: 25px;
+}
+
+.end-time {
+  padding: 15px;
+}
+
+.end-stars {
+  margin-bottom: 55px;
+}
+
+.restart {
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 1.1em; 
+}
+
