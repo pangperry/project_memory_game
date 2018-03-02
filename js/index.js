@@ -35,6 +35,7 @@ $(() => {
     return timer;
   };
 
+  //updates guess display count
   const updateCount = (guesses) => $('#guesses').text(guesses);
 
   const playCardSound = (audio) => {
@@ -44,6 +45,7 @@ $(() => {
 
   const flip = (card) => card.addClass('flipped');
 
+  //avoids multiple-click issues
   const pauseClicks = () => $('li').off('click');
 
   // returns pairs of flipped cards to starting position
@@ -55,6 +57,10 @@ $(() => {
 
   const endGame = (timer) => {
     clearInterval(timer);
+    let finalTime = $('#time').text().slice(14);
+    let stars = $('#stars').html();
+    $('#end-time').text(finalTime);
+    $('#end-stars').html(stars);
     $('#modal').removeClass('hidden');
   };
 
@@ -86,7 +92,8 @@ $(() => {
           }, 1000);
         }
         setTimeout(function () {
-          pairs < 2 ? findPairs(audio, $firstCard, timer, guesses, pairs) : endGame(timer);
+          pairs > 0 ? 
+            endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
         }, 1000);
       }
     });
