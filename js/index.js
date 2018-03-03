@@ -187,10 +187,12 @@ $(() => {
   const runGame = () => {
     const cards = shuffleCards($('li'));
     const audio = $('audio')[0];
+    const buzz = $('audio')[1];
     let pairs = 0;
     let guesses = 0;
     let timer = startTimer();
     audio.volume = .2;
+    buzz.volume = .1;
     display(cards);
     enableStars();
     enableResets(timer);
@@ -205,3 +207,4 @@ $(() => {
       //make responsive
       //add high score list with local storage
       //maybe replace confirmation with modal confirmation
+      //refactor audio names
