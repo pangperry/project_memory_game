@@ -252,31 +252,64 @@ footer  {
           animation: spin .5s linear 1;
 }
 
-@keyframes spin {
+@-webkit-keyframes spin {
   0% {
-    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
     /* transform: rotateY(90deg); */
-    transform: rotateZ(0deg);
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
   }
   33% {
-    transform: rotateX(120deg);
+    -webkit-transform: rotateX(120deg);
+            transform: rotateX(120deg);
     /* transform: rotateY(180deg); */
-    transform: rotateZ(0deg);
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
   }
   66% {
-    transform: rotateX(240deg);
+    -webkit-transform: rotateX(240deg);
+            transform: rotateX(240deg);
     /* transform: rotateY(270deg); */
-    transform: rotateZ(180deg);
+    -webkit-transform: rotateZ(180deg);
+            transform: rotateZ(180deg);
   }
   100% {
-    transform: rotateX(360deg);
+    -webkit-transform: rotateX(360deg);
+            transform: rotateX(360deg);
     /* transform: rotateY(360deg); */
-    transform: rotateZ(360deg);
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
   }
-  
-  /* 0% { transform: scale(1); }
-  25% { transform: scale(1.25); }
-  50% { transform: scale(1.5); }
-  75% { transform: scale(1.25); }
-  100% { transform: scale(1); } */
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    /* transform: rotateY(90deg); */
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  33% {
+    -webkit-transform: rotateX(120deg);
+            transform: rotateX(120deg);
+    /* transform: rotateY(180deg); */
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  66% {
+    -webkit-transform: rotateX(240deg);
+            transform: rotateX(240deg);
+    /* transform: rotateY(270deg); */
+    -webkit-transform: rotateZ(180deg);
+            transform: rotateZ(180deg);
+  }
+  100% {
+    -webkit-transform: rotateX(360deg);
+            transform: rotateX(360deg);
+    /* transform: rotateY(360deg); */
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
+  }
 }
