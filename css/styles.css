@@ -4,13 +4,15 @@
 }
 
 html {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
 }
 
 body {
@@ -60,8 +62,11 @@ h1 {
   width: 85%;
   grid-gap: 30px;
   text-align: center;
-  align-content: center;
-  justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 /* flippable cards inspired by Shay Howe: https://codepen.io/shayhowe/pen/Fvjnf */
@@ -73,27 +78,37 @@ h1 {
   height: 60px;
   cursor: pointer;
   position: relative;
-  align-content: center;
-  justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .card {
   height: 100%;
   position: absolute;
-  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
   width: 100%;
 }
 
 .flipped {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 .card .side {
   display: grid;
-  align-content: center;
-  justify-content: center;
-  backface-visibility: hidden;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   border-radius: 6px;
   height: 100%;
   position: absolute;
@@ -107,7 +122,8 @@ h1 {
   /* color: #2E5C74; */
   line-height: 150px;
   text-align: center;
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 footer  {
@@ -174,4 +190,58 @@ footer  {
   padding: 15px;
   border-radius: 6px;
   font-size: 1.1em; 
+}
+
+
+/* animations */
+
+.vibrate {
+  -webkit-animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+          animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+@-webkit-keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    -webkit-transform: translate3d(8px, 0, 0);
+            transform: translate3d(8px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-20px, 0, 0);
+            transform: translate3d(-20px, 0, 0);
+  }
+
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+            transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    -webkit-transform: translate3d(8px, 0, 0);
+            transform: translate3d(8px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    -webkit-transform: translate3d(-20px, 0, 0);
+            transform: translate3d(-20px, 0, 0);
+  }
+
+  40%, 60% {
+    -webkit-transform: translate3d(4px, 0, 0);
+            transform: translate3d(4px, 0, 0);
+  }
 }

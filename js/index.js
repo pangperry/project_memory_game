@@ -108,11 +108,25 @@ $(() => {
   const pauseClicks = () => $('li').off('click');
 
   // returns pairs of flipped cards to starting position
+
+  const toggleShake = ($card1, $card2) => {
+    $card1.addClass('vibrate');
+    $card2.addClass('vibrate');
+
+    // setTimeouts allow time for cards to be seen
+    setTimeout(() => {
+      $card1.removeClass('vibrate');
+      $card2.removeClass('vibrate');
+    }, 900);
+  };
+
   const resetCards = ($currentCard, $firstCard, audio) => {
+    toggleShake($currentCard, $firstCard);
     $currentCard.removeClass('flipped');
     $firstCard.removeClass('flipped');
     playCardSound(audio);
   };
+
 
   const endGame = (timer) => {
     clearInterval(timer);
@@ -146,7 +160,8 @@ $(() => {
 
           // setTimeouts allow time for cards to be seen
           setTimeout(function () {
-            resetCards($currentCard, $firstCard, audio);
+            resetCards($currentCard, $firstCard, $('#zap')[0]);
+            // resetCards($currentCard, $firstCard, audio);
             $firstCard = null;
           }, 1000);
         }
@@ -175,8 +190,7 @@ $(() => {
 });
 
     //TODOs: 
-      //write stars logic
       //add wrong guess sound and action
       //make responsive
-      //maybe replace confirmation with modal confirmation
       //add high score list with local storage
+      //maybe replace confirmation with modal confirmation
