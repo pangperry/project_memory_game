@@ -57,16 +57,21 @@ h1 {
 
 .board {
   display: grid;
+  margin: 0 auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 25px 0;
+  padding: 15px 10px;
+  background: rgb(62, 115, 127);
   width: 85%;
-  grid-gap: 30px;
+  min-width: 330px;
+  max-width: 400px;
+  /* grid-gap: 10px; */
+  border-radius: 8px;
+  box-shadow: 2px 4px 14px 5px rgb(165, 165, 165);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   text-align: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-content: space-around;
+  justify-content: space-around;
 }
 
 /* flippable cards inspired by Shay Howe: https://codepen.io/shayhowe/pen/Fvjnf */
@@ -74,10 +79,13 @@ h1 {
 .card-container {
   display: grid;
   list-style: none;
+  /* background: rgb(62, 115, 127); */
   width: 60px;
   height: 60px;
   cursor: pointer;
   position: relative;
+  /* border-radius: 8px; */
+  box-shadow: 0px 1px 8px 1px rgb(60, 110, 120);
   -ms-flex-line-pack: center;
       align-content: center;
   -webkit-box-pack: center;
@@ -113,12 +121,12 @@ h1 {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  background: #4949A5;
+  background: rgb(31, 58, 64);
   width: 100%;
 }
 
 .card .back {
-  background: #C40D0D;
+  background: rgb(123,231,255);
   /* color: #2E5C74; */
   line-height: 150px;
   text-align: center;
