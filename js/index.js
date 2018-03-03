@@ -84,8 +84,10 @@ $(() => {
       if (guessCount === 0) {
         selectRating('best')
       } else if (guessCount === 14) {
-        selectRating('good');
+        selectRating('great');
       } else if (guessCount === 20) {
+        selectRating('good');
+      } else if (guessCount === 25) {
         selectRating('fair');
       }
     });
@@ -191,7 +193,7 @@ $(() => {
     let pairs = 0;
     let guesses = 0;
     let timer = startTimer();
-    audio.volume = .2;
+    audio.volume = .3;
     buzz.volume = .1;
     display(cards);
     enableStars();
