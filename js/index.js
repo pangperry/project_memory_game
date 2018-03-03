@@ -108,6 +108,16 @@ $(() => {
   const pauseClicks = () => $('li').off('click');
 
   // returns pairs of flipped cards to starting position
+  const toggleSpin = ($card1, $card2) => {
+    $card1.addClass('win');
+    $card2.addClass('win');
+
+    // setTimeouts allow time for cards to be seen
+    setTimeout(() => {
+      $card1.removeClass('win');
+      $card2.removeClass('win');
+    }, 900);
+  };
 
   const toggleShake = ($card1, $card2) => {
     $card1.addClass('vibrate');
@@ -153,6 +163,7 @@ $(() => {
         pauseClicks();
         guesses++;
         if (isMatch) {
+          toggleSpin($currentCard, $firstCard);
           pairs++;
           $firstCard = null;
         } else {
