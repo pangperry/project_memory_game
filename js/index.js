@@ -54,6 +54,12 @@ $(() => {
         if (!$('#modal').hasClass('hidden')) {
           $('#modal').addClass('hidden');
         }
+        if (!$('.pyro').hasClass('hidden')) {
+          $('.pyro').addClass('hidden');
+        }
+        if (!$('.pyro > *').hasClass('hidden')) {
+          $('.pyro > *').addClass('hidden');
+        }
         $('li').find('.flipped').removeClass('flipped');
         resetTime(timer);
         runGame();
@@ -147,6 +153,8 @@ $(() => {
     $('#end-time').text(finalTime);
     $('#end-stars').html(stars);
     $('#modal').removeClass('hidden');
+    $('.pyro').removeClass('hidden');
+    $('.pyro > *').removeClass('hidden');
   };
 
   // recursively finds pairs until pairs equals 8
@@ -205,7 +213,7 @@ $(() => {
 });
 
     //TODOs: 
-      //make responsive
+      //finish fireworks
       //add high score list with local storage
       //maybe replace confirmation with modal confirmation
       //refactor audio names
