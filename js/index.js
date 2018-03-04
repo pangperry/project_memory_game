@@ -43,7 +43,6 @@ $(() => {
     $('#seconds').text('');
   };
 
-
   const resetWithConfirm = (timer) => {
     $('button').on('click', function() {
       if ($(this).hasClass('cancel')) {
@@ -232,8 +231,3 @@ $(() => {
 
   runGame();
 });
-
-    //TODOs: 
-      //final cleanup, code and styling
-      //maybe add high score list with local storage
-      //mayber refactor audio names
