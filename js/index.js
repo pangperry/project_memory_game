@@ -52,8 +52,8 @@ $(() => {
       };
       if ($(this).hasClass('reset-now')) {
         $('#restart-modal').addClass('hidden');
-        enableResets(timer);
         resetTime(timer);
+        enableResets(timer);
         runGame();
       }
     });
@@ -63,7 +63,7 @@ $(() => {
   const enableResets = (timer) => {
     $('button').on('click', function () {
       let confirmation = false;
-      if ($(this).hasClass('re-btn')) {
+      if ($(this).hasClass('re-btn') || $(this).hasClass('words-btn')) {
         $('#restart-modal').removeClass('hidden');
         $('button').off();
         resetWithConfirm(timer);
@@ -206,7 +206,7 @@ $(() => {
           }, 1000);
         }
         setTimeout(function () {
-          pairs > 0 ?
+          pairs > 7 ?
             endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
         }, 1000);
       }
