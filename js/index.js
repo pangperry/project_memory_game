@@ -205,7 +205,6 @@ $(() => {
 });
 
     //TODOs: 
-      //add wrong guess sound and action
       //make responsive
       //add high score list with local storage
       //maybe replace confirmation with modal confirmation

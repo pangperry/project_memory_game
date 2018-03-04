@@ -27,9 +27,13 @@ header, body, main, .board, li {
 
 header {
   width: 100%;
-  padding: 60px 0;
+  padding: 70px 0;
   height: 150px;
-  margin: 0 auto;
+  margin: 0 auto 30px 0;
+}
+
+.words-btn {
+  display: none;
 }
 
 .re-btn {
@@ -59,9 +63,9 @@ h1 {
   display: grid;
   margin: 0 auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 15px 10px;
+  padding: 15px;
   background: rgb(62, 115, 127);
-  width: 85%;
+  width: 90%;
   min-width: 330px;
   max-width: 400px;
   /* grid-gap: 10px; */
@@ -127,7 +131,6 @@ h1 {
 
 .card .back {
   background: rgb(123,231,255);
-  /* color: #2E5C74; */
   line-height: 150px;
   text-align: center;
   -webkit-transform: rotateY(180deg);
@@ -169,21 +172,22 @@ footer  {
 .success {
   /* display: none; */
   /* margin: 0 auto; */
+  top: 150px;
   text-align: center;
-  min-width: 200px;
-  max-width: 350px;
+  width: 90%; 
+  height: 300px;
+  min-width: 330px;
+  max-width: 400px;
   margin: 0 auto;
   padding: 0;
   position: relative;
   background: #fff;
   border-radius: 5px;
-  top: 150px;
-  width: 90%;
-  height: 300px;
 }
 
 .success h1 {
-  padding: 25px;
+  /* min-width: 220px; */
+  padding: 25px 0;
 }
 
 .end-time {
@@ -319,5 +323,77 @@ footer  {
     /* transform: rotateY(360deg); */
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg);
+  }
+}
+
+/* media queries */
+
+@media screen and (min-width: 330px) {
+ /* .success h1 {
+   padding: 25px 0;
+ } */
+
+}
+@media screen and (min-width: 595px) {
+  body {
+    font-size: 1.25em;
+  }
+
+  header {
+    padding: 120px;
+    height: 290px;
+  }
+
+  .board {
+    min-width: 500px;
+    max-width: 750px;
+    width: 80%;
+    padding: 25px;
+  }
+
+  .card-container {
+    width: 75px;
+    height: 75px;
+  }
+
+  .re-btn {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .success {
+    top: 275px;
+  }
+
+  .end-stars {
+    margin-bottom: 35px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .re-btn {
+    display: none;
+  }
+
+  .words-btn {
+    display: block;
+    position: fixed;
+    top: 30px;
+    right: 10%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 9px;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  footer {
+    width: 55%;
+  }
+  .words-btn {
+    top: 30px; 
+    right: 15%;
   }
 }
