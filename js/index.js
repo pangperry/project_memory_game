@@ -98,7 +98,7 @@ $(() => {
   const selectRating = (type) => {
     resetRatings();
     const $ratings = $('.stars');
-    const options = ['best', 'great', 'good', 'fair'];
+    const options = ['best', 'great', 'good'];
     const rating = options.indexOf(type);
     $($ratings[rating]).removeClass('hidden');
   };
