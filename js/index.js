@@ -51,6 +51,7 @@ $(() => {
       };
       if ($(this).hasClass('reset-now')) {
         $('#restart-modal').addClass('hidden');
+        $('li').find('.flipped').removeClass('flipped');
         resetTime(timer);
         enableResets(timer);
         runGame();
