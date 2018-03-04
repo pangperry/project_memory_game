@@ -155,6 +155,8 @@ $(() => {
     $('#modal').removeClass('hidden');
     $('.pyro').removeClass('hidden');
     $('.pyro > *').removeClass('hidden');
+    let yay = $("#yay")[0];
+    yay.play();
   };
 
   // recursively finds pairs until pairs equals 8
@@ -213,7 +215,6 @@ $(() => {
 });
 
     //TODOs: 
-      //finish fireworks
-      //add high score list with local storage
-      //maybe replace confirmation with modal confirmation
-      //refactor audio names
+      //fix icon restart confirmation 
+      //maybe add high score list with local storage
+      //mayber refactor audio names
