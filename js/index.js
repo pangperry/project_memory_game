@@ -162,7 +162,6 @@ $(() => {
     playCardSound(audio);
   };
 
-
   const endGame = (timer) => {
     clearInterval(timer);
     let finalTime = $('#time').text().slice(14);
@@ -232,6 +231,6 @@ $(() => {
 });
 
     //TODOs: 
-      //fix icon restart confirmation 
+      //final cleanup, code and styling
       //maybe add high score list with local storage
       //mayber refactor audio names
