@@ -41,16 +41,33 @@ $(() => {
     $('#hours').text('');
     $('#minutes').text('');
     $('#seconds').text('');
+  };
+
+
+  const resetWithConfirm = (timer) => {
+    $('button').on('click', function() {
+      if ($(this).hasClass('cancel')) {
+        $('#restart-modal').addClass('hidden');
+        enableResets(timer);
+      };
+      if ($(this).hasClass('reset-now')) {
+        $('#restart-modal').addClass('hidden');
+        enableResets(timer);
+        resetTime(timer);
+        runGame();
+      }
+    });
   }
 
   //enables both reset buttons, one with confirmation
   const enableResets = (timer) => {
     $('button').on('click', function () {
-      let confirmation = true;
+      let confirmation = false;
       if ($(this).hasClass('re-btn')) {
-        message = window.confirm("Restart game?");
-      }
-      if (confirmation || $(this).hasClass('start-btn')) {
+        $('#restart-modal').removeClass('hidden');
+        $('button').off();
+        resetWithConfirm(timer);
+      } else if ($(this).hasClass('start-btn')) {
         if (!$('#modal').hasClass('hidden')) {
           $('#modal').addClass('hidden');
         }
@@ -63,14 +80,14 @@ $(() => {
         $('li').find('.flipped').removeClass('flipped');
         resetTime(timer);
         runGame();
-      };
+      }
     });
   };
-  
+
   const resetRatings = () => {
     const $stars = $('.stars');
     for (let i = 0; i < $stars.length; i++) {
-      if(!$($stars[i]).hasClass('hidden')) {
+      if (!$($stars[i]).hasClass('hidden')) {
         $($stars[i]).addClass('hidden');
       }
     }
@@ -189,7 +206,7 @@ $(() => {
           }, 1000);
         }
         setTimeout(function () {
-          pairs > 7 ?
+          pairs > 0 ?
             endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
         }, 1000);
       }

@@ -155,8 +155,8 @@ footer  {
   margin: 0 0 20px 0;
 }
 
-/* modal */
-#modal {
+/* modals */
+#modal, #restart-modal  {
   color: #fff;
   position: fixed;
   padding: 0;
@@ -171,6 +171,31 @@ footer  {
 .hidden {
   display: none;
 }
+
+.warning {
+  background: #fff;
+  top: 100px;
+  text-align: center;
+  min-width: 330px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  background: #fff;
+}
+.warning > p {
+  font-size: 1.1em;
+  padding: 25px 0;
+  color: #000;
+}
+.warning > button {
+  margin: 0;
+  padding: 25px 0;
+  width: 49%; 
+  border-radius: 9px;
+  background: #bbb;
+}
+
 
 .success {
   /* display: none; */
