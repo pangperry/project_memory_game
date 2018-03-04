@@ -59,14 +59,16 @@ $(() => {
     });
   }
 
-  //enables both reset buttons, one with confirmation
+  //enables all reset buttons
   const enableResets = (timer) => {
     $('button').on('click', function () {
       let confirmation = false;
+      //resets with confirmation
       if ($(this).hasClass('re-btn') || $(this).hasClass('words-btn')) {
         $('#restart-modal').removeClass('hidden');
         $('button').off();
         resetWithConfirm(timer);
+      //resets without confirmation
       } else if ($(this).hasClass('start-btn')) {
         if (!$('#modal').hasClass('hidden')) {
           $('#modal').addClass('hidden');
@@ -101,6 +103,7 @@ $(() => {
     $($ratings[rating]).removeClass('hidden');
   };
 
+  // dynamically updates stars
   const enableStars = () => {
     $("#guesses").change(() => {
       let guessCount = Number($("#guesses").text());
