@@ -110,12 +110,12 @@ $(() => {
       if (guessCount === 0) {
         selectRating('best')
       } else if (guessCount === 14) {
+        resetRatings();
         selectRating('great');
       } else if (guessCount === 20) {
+        resetRatings();
         selectRating('good');
-      } else if (guessCount === 25) {
-        selectRating('fair');
-      }
+      } 
     });
   };
 
@@ -232,3 +232,16 @@ $(() => {
 
   runGame();
 });
+//TODOS: 
+  //required:
+    // add Code dependencies to README
+  //I found a bug: hit restart after clicking on one tile
+    //consider looking at the suggestions before attacking the bug to see if it might be handled
+
+  //suggestions:
+    //simplify stars + fix star functionality
+      //★☆
+      //it looks like the stars dissapear after a certain number of guesses
+    //
+
+
