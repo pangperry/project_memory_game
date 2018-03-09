@@ -51,9 +51,10 @@ const resetWithConfirm = (timer) => {
     if ($(this).hasClass('reset-now')) {
       $('#restart-modal').addClass('hidden');
       $('li').find('.flipped').removeClass('flipped');
+      $('li').off(); //needed to avoid reset after one flip bug
       resetTime(timer);
       enableResets(timer);
-      runGame();
+      init();
     }
   });
 }
@@ -80,7 +81,7 @@ const enableResets = (timer) => {
       }
       $('li').find('.flipped').removeClass('flipped');
       resetTime(timer);
-      runGame();
+      init();
     }
   });
 };
@@ -178,10 +179,10 @@ const endGame = (timer) => {
 };
 
 // recursively finds pairs until pairs equals 8
-const findPairs = (audio, $firstCard, timer, guesses, pairs) => {
-  updateCount(guesses);
+const findPairs = ($firstCard, game) => {
+  updateCount(game.guesses);
   $('li').click(function (e) {
-    playCardSound(audio);
+    playCardSound(game.flipSound);
     const $currentCard = $(this).find('.card');
     const isFlippable = !$currentCard.hasClass('flipped');
     if (!$firstCard && isFlippable) {
@@ -191,55 +192,43 @@ const findPairs = (audio, $firstCard, timer, guesses, pairs) => {
       const isMatch = $firstCard[0].dataset.pair === $currentCard[0].dataset.pair;
       flip($currentCard);
       pauseClicks();
-      guesses++;
+      game.guesses++;
       if (isMatch) {
         toggleSpin($currentCard, $firstCard);
-        pairs++;
+        game.pairs++;
         $firstCard = null;
       } else {
         pauseClicks();
 
         // setTimeouts allow time for cards to be seen
         setTimeout(function () {
-          resetCards($currentCard, $firstCard, $('#zap')[0]);
+          resetCards($currentCard, $firstCard, game.buzzSound);
           // resetCards($currentCard, $firstCard, audio);
           $firstCard = null;
         }, 1000);
       }
       setTimeout(function () {
-        pairs > 7 ?
-          endGame(timer) : findPairs(audio, $firstCard, timer, guesses, pairs);
+        game.pairs > 7 ?
+          endGame(game.timer) : findPairs($firstCard, game);
       }, 1000);
     }
   });
 }
 
-const runGame = () => {
+const init = () => {
+  let game = {};
   const cards = shuffleCards($('li'));
-  const audio = $('audio')[0];
-  const buzz = $('audio')[1];
-  let pairs = 0;
-  let guesses = 0;
-  let timer = startTimer();
-  audio.volume = .3;
-  buzz.volume = .1;
+  game.flipSound = $('audio')[0];
+  game.buzzSound = $('audio')[1];
+  game.flipSound.volume = .3;
+  game.buzzSound.volume = .1;
+  game.pairs = 0;
+  game.guesses = 0;
+  game.timer = startTimer();
   display(cards);
   enableStars();
-  enableResets(timer);
-  findPairs(audio, null, timer, guesses, pairs);
+  enableResets(game.timer);
+  findPairs(null, game);
 }
 
-$(() => runGame());
-//TODOS: 
-  //required:
-    // add Code dependencies to README
-  //I found a bug: hit restart after clicking on one tile
-    //consider looking at the suggestions before attacking the bug to see if it might be handled
-
-  //suggestions:
-    //simplify stars + fix star functionality
-      //★☆
-      //it looks like the stars dissapear after a certain number of guesses
-    //
-
-
+$(() => init());
