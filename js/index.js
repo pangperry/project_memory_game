@@ -13,6 +13,13 @@ const display = (cards) => {
   }
 };
 
+const enableTimer = (game) => {
+  $('.card').click(() => {
+    game.timer = startTimer();
+    $('.card').off();
+  });
+};
+
 // starts and dynamically updates timer
 const startTimer = () => {
   const start = Date.now();
@@ -34,40 +41,40 @@ const startTimer = () => {
   return timer;
 };
 
-const resetTime = (timer) => {
-  clearInterval(timer);
-  timer = null;
+const resetTime = (game) => {
+  clearInterval(game.timer);
+  game.timer = null;
   $('#hours').text('');
   $('#minutes').text('');
   $('#seconds').text('');
 };
 
-const resetWithConfirm = (timer) => {
+const resetWithConfirm = (game) => {
   $('button').on('click', function () {
     if ($(this).hasClass('cancel')) {
       $('#restart-modal').addClass('hidden');
-      enableResets(timer);
+      enableResets(game);
     };
     if ($(this).hasClass('reset-now')) {
       $('#restart-modal').addClass('hidden');
       $('li').find('.flipped').removeClass('flipped');
       $('li').off(); //needed to avoid reset after one flip bug
-      resetTime(timer);
-      enableResets(timer);
+      resetTime(game);
+      enableResets(game);
       init();
     }
   });
 }
 
 //enables all reset buttons
-const enableResets = (timer) => {
+const enableResets = (game) => {
   $('button').on('click', function () {
     let confirmation = false;
     //resets with confirmation
     if ($(this).hasClass('re-btn') || $(this).hasClass('words-btn')) {
       $('#restart-modal').removeClass('hidden');
       $('button').off();
-      resetWithConfirm(timer);
+      resetWithConfirm(game);
       //resets without confirmation
     } else if ($(this).hasClass('start-btn')) {
       if (!$('#modal').hasClass('hidden')) {
@@ -80,7 +87,7 @@ const enableResets = (timer) => {
         $('.pyro > *').addClass('hidden');
       }
       $('li').find('.flipped').removeClass('flipped');
-      resetTime(timer);
+      resetTime(game);
       init();
     }
   });
@@ -216,18 +223,18 @@ const findPairs = ($firstCard, game) => {
 }
 
 const init = () => {
-  let game = {};
   const cards = shuffleCards($('li'));
+  let game = {};
   game.flipSound = $('audio')[0];
   game.buzzSound = $('audio')[1];
   game.flipSound.volume = .3;
   game.buzzSound.volume = .1;
   game.pairs = 0;
   game.guesses = 0;
-  game.timer = startTimer();
+  enableTimer(game);
   display(cards);
   enableStars();
-  enableResets(game.timer);
+  enableResets(game);
   findPairs(null, game);
 }
 
