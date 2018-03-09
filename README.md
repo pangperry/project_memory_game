@@ -13,3 +13,5 @@ The app is built with the following code dependencies:
 
 1. jQuery
 2. Font Awesome
+
+Browser-sync (and node.js) was used during development.
